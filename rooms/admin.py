@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from django.utils.html import mark_safe
 
 
 @admin.register(models.RoomType, models.Facility, models.HouseRule, models.Amenity)
@@ -15,15 +16,20 @@ class ItemAdmin(admin.ModelAdmin):
     pass
 
 
+class PhotoInline(admin.TabularInline):
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
+    inlines = (PhotoInline,)
     fieldsets = (
         (
             "Basic Info",
-            {"fields": ("name", "description", "country", "price", "address",)},
+            {"fields": ("name", "description", "country", "city", "price", "address",)},
         ),
         ("Times", {"fields": ("check_in", "check_out", "instant_book",)},),
         (
@@ -36,8 +42,6 @@ class RoomAdmin(admin.ModelAdmin):
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths",)},),
         ("Last Details", {"fields": ("host",)},),
     )
-
-    ordering = ("name", "price", "bedrooms")
 
     list_display = (
         "name",
@@ -52,6 +56,7 @@ class RoomAdmin(admin.ModelAdmin):
         "instant_book",
         "count_amenities",
         "count_photos",
+        "total_rating",
     )
     list_filter = (
         "instant_book",
@@ -70,6 +75,7 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
+    raw_id_fields = ("host",)
 
     def count_amenities(self, obj):
         # object는 row
@@ -79,12 +85,20 @@ class RoomAdmin(admin.ModelAdmin):
         # object는 row
         return obj.photos.count()
 
+    count_photos.short_description = "photo count"
     count_amenities.short_description = "Hello Sexy"
 
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
 
-    """ Room Admin Definition """
+    """ Photo Admin Definition """
+
+    list_display = ("__str__", "get_thumnail")
+
+    def get_thumnail(self, obj):
+        return mark_safe(f"<img width =100 src ={obj.file.url}>")
+
+    get_thumnail.short_description = "Thumnail"
 
     pass
