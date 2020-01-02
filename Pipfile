@@ -18,6 +18,7 @@ django-countries = "*"
 django-seed = "*"
 django-dotenv = "*"
 requests = "*"
+pipenv-to-requirements = "*"
 
 [pipenv]
 allow_prereleases = true
