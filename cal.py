@@ -63,4 +63,5 @@ class Calendar(calendar.Calendar):
         return days
 
     def get_month(self):
+        print(self.month)
         return self.month_names[self.month - 1]
