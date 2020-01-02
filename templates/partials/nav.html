@@ -1,14 +1,37 @@
-<ul class ="flex item-center text-sm font-medium h-full">    
+<ul class="flex item-center text-sm font-medium h-full">
     {% if user.is_authenticated %}
-    <li>
-        <a class = "ml-8" href="{% url "users:logout" %}">Log Out</a>
-    </li>    
+
+    <li class="nav_link">
+        <a href=" {% url "users:switch-hosting" %}">
+
+            {% if request.session.is_hosting %}
+            Stop hosting
+            {% else %}
+            Start Hosting
+            {% endif %}
+        </a>
+    </li>
+
+    {% if request.session.is_hosting %}
+    <li class="nav_link">
+        <a href=" {% url "rooms:create-room" %} ">Create Room</a>
+        {% endif %}
+
+    <li class="nav_link">
+        <a href=" {% url "lists:see-favs" %}"> Favorites({{user.list.rooms.count}})</a>
+    </li>
+    <li class="nav_link">
+        <a href="{{user.get_absolute_url}}">Profile</a>
+    </li>
+    <li class="nav_link">
+        <a href="{% url "users:logout" %}">Log Out</a>
+    </li>
     {% else %}
-    <li class = "nav_link">
+    <li class="nav_link">
         <a href="{% url "users:login" %}">Log in</a>
     </li>
-    <li class = "nav_link">
+    <li class="nav_link">
         <a href="{% url "users:signup" %}">Sign up</a>
     </li>
-    {% endif %}   
+    {% endif %}
 </ul>

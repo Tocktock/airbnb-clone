@@ -13,7 +13,6 @@ class Conversation(core_models.TimeStampedModel):
         usernames = []
         for user in self.participants.all():
             usernames.append(user.username)
-            print(user.username)
         return ", ".join(usernames)
 
     def count_message(self):

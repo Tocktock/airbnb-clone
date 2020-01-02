@@ -1,21 +1,27 @@
-{% extends "base.html" %} {% block page_title %} Home {% endblock page_title %}
+{% extends "base.html" %}
+{% load i18n %}
+{% block page_title %} Home {% endblock page_title %}
 {% block content %}
 
-<div class="container mx-auto">
+<div class="container mx-auto pb-10">
   <div class="bg-gray-800 mx-auto mt-32 mb-24 -mx-40 h-50vh rounded-xl bg-center bg-cover"
     style="background-image: url(https://images.unsplash.com/photo-1536315238512-4c8cebdaaf93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1956&q=80);">
   </div>
   <div class="flex flex-wrap -mx-40">
-    {% for room in rooms %} {% include "partials/room_card.html" %} {% endfor %}
+    {% for room in rooms %} {% include "mixins/room_card.html" with room=room%} {% endfor %}
   </div>
-  {{now}}
-  <h5>
+
+  <div class="flex items-center justify-center mx-auto container">
     {% if page_obj.has_previous %}
-    <a href="?page={{page_obj.previous_page_number}}">Previous </a>
-    {% endif %} Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}\
-    {% if page_obj.has_next %}
-    <a href="?page={{page_obj.next_page_number}}">Next</a>
+    <a href="?page={{page_obj.previous_page_number}}"> <i class="fas fa-arrow-left fa-lg text-teal-500"></i> </a>
     {% endif %}
-  </h5>
+    <span class="mx-3 font-medium text-lg">
+      {% blocktrans with current_page=page_obj.number total_pages=page_obj.paginator.num_pages %}Page {{current_page}}
+      of {{total_pages}} {% endblocktrans %}
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{page_obj.next_page_number}}"><i class="fas fa-arrow-right fa-lg text-teal-500"></i></a>
+    {% endif %}
+  </div>
 </div>
 {% endblock content %}

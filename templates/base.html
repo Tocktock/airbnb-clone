@@ -1,31 +1,47 @@
-{% load static %}
+{% load static i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href = "{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title> {% block page_title %}
-    
-    {% endblock page_title %} </title>
+        {% endblock page_title %} </title>
 </head>
-<body class="text-gray-800 mt-24" >
-    <header class = "inset-0 containerb max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-400 fixed bg-white">
-     <div class ="flex items-center">
-        <a href="{% url "core:home" %}" class="mr-6">
-            <img class="w-10" src="{% static 'img/logo.png' %}" />
-        </a>
-        {% block search-bar %}
-        <form method="get" action={% url "rooms:search" %} class="w-full" >
-          <input class="search-box w-full placeholder-gray-600 font-medium border px-5 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none " name="city" placeholder="Search by City" />
-        </form>
-     {% endblock search-bar %}
-     </div>
-     {% include "partials/nav.html" %}
+
+<body class="text-gray-800 mt-24 font-light">
+    {% include "partials/messages.html" %}
+    <header
+        class="inset-0 containerb max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-400 fixed bg-white">
+        <div class="flex items-center">
+            <a href="{% url "core:home" %}" class="mr-6">
+                <img class="w-10" src="{% static 'img/logo.png' %}" />
+            </a>
+            {% block search-bar %}
+            <form method="get" action={% url "rooms:search" %} class="w-full">
+                <input
+                    class="search-box w-full placeholder-gray-600 font-medium border px-5 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none "
+                    name="city" placeholder=" {% trans 'Search by City' %}" />
+            </form>
+            {% endblock search-bar %}
+        </div>
+        {% include "partials/nav.html" %}
     </header>
     {% block content %}{% endblock content%}
+
     {% include "partials/footer.html" %}
-    
+    <script>
+        const langSelect = document.getElementById("js-lang");
+        const handleLangChange = () => {
+            const selected = langSelect.value;
+            fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload());
+        }
+        langSelect.addEventListener("change", handleLangChange);
+    </script>
 </body>
+
 </html>
