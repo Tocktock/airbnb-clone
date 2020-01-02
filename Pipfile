@@ -19,6 +19,7 @@ django-seed = "*"
 django-dotenv = "*"
 requests = "*"
 pipenv-to-requirements = "*"
+sentry-sdk = "==0.13.5"
 
 [pipenv]
 allow_prereleases = true
