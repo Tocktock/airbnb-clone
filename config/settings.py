@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.conf import settings
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -27,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "fJAn@ZV$NLV%BFw8Nq8QCWpwRRu#Xu+k")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG"))
 
-ALLOWED_HOSTS = [".elasticbeanstalk.com"]
+ALLOWED_HOSTS = [".elasticbeanstalk.com", "localhost"]
 
 
 # Application definition
