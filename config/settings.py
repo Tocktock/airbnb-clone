@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY", "fJAn@ZV$NLV%BFw8Nq8QCWpwRRu#Xu+k")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DEBUG"))
+DEBUG = False
 
 ALLOWED_HOSTS = [".elasticbeanstalk.com", "127.0.0.1"]
 
@@ -97,13 +97,23 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.environ.get("RDS_HOST"),
-            "NAME": os.environ.get("RDS_NAME"),
-            "USER": os.environ.get("RDS_USER"),
-            "PASSWORD": os.environ.get("RDS_PASSWORD"),
-            "PORT": os.environ.get("RDS_PORT"),
+            "HOST": "airbnb-clone.cwvkmgatxilg.ap-northeast-2.rds.amazonaws.com",
+            "NAME": "airbnb-clone",
+            "USER": "postgresql",
+            "PASSWORD": "clock7time",
+            "PORT": "5432",
         }
     }
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "HOST": os.environ.get("RDS_HOST"),
+    #         "NAME": os.environ.get("RDS_NAME"),
+    #         "USER": os.environ.get("RDS_USER"),
+    #         "PASSWORD": os.environ.get("RDS_PASSWORD"),
+    #         "PORT": os.environ.get("RDS_PORT"),
+    #     }
+    # }
 
 
 # Password validation
