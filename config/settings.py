@@ -97,13 +97,25 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.environ.get("RDS_HOST"),
-            "NAME": os.environ.get("RDS_NAME"),
-            "USER": os.environ.get("RDS_USER"),
-            "PASSWORD": os.environ.get("RDS_PASSWORD"),
-            "PORT": os.environ.get("RDS_PORT"),
+            "HOST": os.environ.get(
+                "airbnb-clone.cwvkmgatxilg.ap-northeast-2.rds.amazonaws.com"
+            ),
+            "NAME": os.environ.get("postgres"),
+            "USER": os.environ.get("postgres"),
+            "PASSWORD": os.environ.get("clock7time"),
+            "PORT": os.environ.get("5432"),
         }
     }
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql",
+    #         "HOST": os.environ.get("RDS_HOST"),
+    #         "NAME": os.environ.get("RDS_NAME"),
+    #         "USER": os.environ.get("RDS_USER"),
+    #         "PASSWORD": os.environ.get("RDS_PASSWORD"),
+    #         "PORT": os.environ.get("RDS_PORT"),
+    #     }
+    # }
 
 
 # Password validation
