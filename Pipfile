@@ -21,6 +21,7 @@ pipenv-to-requirements = "*"
 sentry-sdk = "==0.13.5"
 psycopg2 = "*"
 django-storages = "*"
+boto3 = "*"
 
 [pipenv]
 allow_prereleases = true
