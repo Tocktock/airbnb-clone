@@ -150,7 +150,7 @@ class KakaoException(Exception):
 
 def kakao_login(request):
     client_id = os.environ.get("KAKAO_ID")
-    redirect_uri = "http://airbnb-clone.xvuzexi3fp.ap-northeast-2.elasticbeanstalk.com//users/continue/kakao/callback"
+    redirect_uri = "http://airbnb-clone.xvuzexi3fp.ap-northeast-2.elasticbeanstalk.com/users/continue/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
