@@ -48,7 +48,7 @@ PROJECT_APPS = [
     "lists.apps.ListsConfig",
     "conversations.apps.ConversationsConfig",
 ]
-THIRD_PARTY_APPS = ["django_countries", "django_seed"]
+THIRD_PARTY_APPS = ["django_countries", "django_seed", "storages"]
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
@@ -169,4 +169,9 @@ if not DEBUG:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True,
     )
-
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = "airbnb-clone-manyangCloud"
+    AWS_AUTO_CREATE_BUCKE = True

@@ -20,6 +20,7 @@ requests = "*"
 pipenv-to-requirements = "*"
 sentry-sdk = "==0.13.5"
 psycopg2 = "*"
+django-storages = "*"
 
 [pipenv]
 allow_prereleases = true
