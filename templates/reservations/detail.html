@@ -52,7 +52,7 @@ Reservation {{reservation.check_in}}
             <a href=" {% url 'reservations:edit' reservation.pk 'cancel' %} " class="btn-link block px-3 mb-5">Cancle
                 Reservation</a>
 
-            {% if reservation.room.host != user %}
+            {% if reservation.room.host == user %}
             <a href=" {% url 'reservations:edit' reservation.pk 'confirm' %} " class="btn-link block px-5">Confirm
                 Reservation</a>
 

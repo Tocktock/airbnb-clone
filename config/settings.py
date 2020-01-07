@@ -25,10 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY", "fJAn@ZV$NLV%BFw8Nq8QCWpwRRu#Xu+k")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-print(os.environ.get("DEBUG"))
 DEBUG = os.environ.get("DEBUG") == "True"
 
-print(os.environ.get("SECRET_KEY"))
 # print(DEBUG)
 ALLOWED_HOSTS = [".elasticbeanstalk.com", "127.0.0.1"]
 

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+
+{{user.first_name}}'s reservation
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="h-full">
+    <div class="mx-auto container flex flex-col items-center">
+        <h3 class="text-2xl"> {{user.first_name}}'s Reservation </h3>
+
+        <div class="w-full flex flex-wrap justify-around ">
+            {% for reservation in user.reservations.all %}
+            <div class="w-full flex mt-5">
+                <div class="w-full flex items-center justify-center border-b">
+                    {% include "mixins/room_card.html" with room=reservation.room %}
+                    <div class="flex flex-col w-64 ml-32 mb-12">
+                        <div>
+                            <a href="{% url "reservations:detail" reservation.pk %}" class="btn-link m-5 block">
+                                Reservation
+                                Detail </a>
+                        </div>
+                        <div>
+                            <a href="{% url "reservations:delete-res" reservation.pk  %}" class="btn-link m-5 block">
+                                Cancel
+                                Reservation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

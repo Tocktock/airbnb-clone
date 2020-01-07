@@ -18,15 +18,17 @@
         {% endif %}
 
     <li class="nav_link">
-        <a href=" {% url "lists:see-favs" %}"> Favorites({{user.list.rooms.count}})</a>
+        <a href=" {% url "lists:see-favs" %}"> Favorites({{user.get_my_fav_rooms.count}})</a>
+    </li>
+    <li class="nav_link">
+        <a href=" {% url "reservations:my-reservations" %} ">My reservation</a>
     </li>
     <li class="nav_link">
         <a href="{{user.get_absolute_url}}">Profile</a>
     </li>
     <li class="nav_link">
         <a href="{% url "users:logout" %}">Log Out</a>
-    </li>
-    {% else %}
+        {% else %}
     <li class="nav_link">
         <a href="{% url "users:login" %}">Log in</a>
     </li>

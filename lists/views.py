@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from rooms import models as room_models
 from . import models
+from users import models as user_models
 
 
 def toggle_room(request, room_pk):
@@ -11,6 +12,7 @@ def toggle_room(request, room_pk):
         the_list, created = models.List.objects.get_or_create(
             user=request.user, name="My Favorite Houses"
         )
+
         if action == "add":
             the_list.rooms.add(room)
         elif action == "remove":

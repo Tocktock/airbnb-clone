@@ -1,4 +1,5 @@
 import uuid
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractUser
@@ -8,6 +9,7 @@ from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.shortcuts import reverse
 from core import managers as core_managers
+from lists import models as list_models
 
 # Create your models here.
 
@@ -65,6 +67,10 @@ class User(AbstractUser):
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
+
+    def get_my_fav_rooms(self):
+        lists = self.lists.get(name="My Favorite Houses")
+        return lists.rooms
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})

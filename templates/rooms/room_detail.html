@@ -33,6 +33,7 @@
         </div>
 
 
+        {% if user.is_authenticated != False %}
         {% on_favs room as on_favs_boolean %}
 
         {% if on_favs_boolean %}
@@ -49,6 +50,10 @@
             </a>
         </div>
         {% endif %}
+
+        {% endif %}
+
+
 
         <div class="flex border-section">
             <span class="mr-5 font-light">{{room.room_type}}</span>

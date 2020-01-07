@@ -1,5 +1,5 @@
 import datetime
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from django.http import Http404
@@ -10,6 +10,12 @@ from . import models
 
 class CreateError(Exception):
     pass
+
+
+def delete(request, pk):
+    print("Abc")
+    models.Reservation.objects.get(pk=pk).delete()
+    return redirect("reservations:my-reservations")
 
 
 def create(request, room, year, month, day):
@@ -29,7 +35,6 @@ def create(request, room, year, month, day):
             check_in=date_obj,
             check_out=date_obj + datetime.timedelta(days=1),
         )
-        print(reservation.pk)
         return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
 
 
@@ -64,3 +69,7 @@ def edit_reservation(request, pk, verb):
     reservation.save()
     messages.success(request, "Reservation Updated")
     return redirect(reverse("reservations:detail", kwargs={"pk": reservation.pk}))
+
+
+class MyReservationView(TemplateView):
+    template_name = "reservations/see_reservation.html"
