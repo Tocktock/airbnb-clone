@@ -11,6 +11,6 @@ const css = () => {
     .pipe(postCSS([require("tailwindcss"), require("autoprefixer")]))
     .pipe(minify())
     .pipe(gulp.dest("static/css"));
-};
+}; 
 
 exports.default = css;

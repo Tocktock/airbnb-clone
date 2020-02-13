@@ -1,5 +1,4 @@
 import uuid
-from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractUser
@@ -8,8 +7,6 @@ from django.conf import settings
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.shortcuts import reverse
-from core import managers as core_managers
-from lists import models as list_models
 
 # Create your models here.
 

@@ -10,7 +10,7 @@ urlpatterns = [
     path("update-password/", views.UpdatePasswordView.as_view(), name="password"),
     path("signup/", views.SignUpView.as_view(), name="signup"),
     path(
-        "verify/<str:key>/", views.complete_verification, name="complete-verification"
+        "verify/<str:key>/", views.complete_verification, name="complete-verification" 
     ),
     path("continue/github/", views.github_login, name="github-login"),
     path("continue/github/callback/", views.github_callback, name="github-callback"),

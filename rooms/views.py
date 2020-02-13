@@ -42,8 +42,8 @@ class SearchView(View):
 
     def get(self, request):
 
-        country = request.GET.get("country")
-        if country:
+        city = request.GET.get("city")
+        if city:
             form = forms.SearchForm(request.GET)
             if form.is_valid():
                 city = form.cleaned_data.get("city")
@@ -92,6 +92,7 @@ class SearchView(View):
                 for facility in facilities:
                     rooms = rooms.filter(facilities__pk=facility.pk)
 
+                #testing situation about paginator you should make lots of room data.
                 page_size = 2
                 paginator = Paginator(rooms, page_size)
                 page = int(request.GET.get("page", 1))

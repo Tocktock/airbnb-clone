@@ -13,7 +13,6 @@ class CreateError(Exception):
 
 
 def delete(request, pk):
-    print("Abc")
     models.Reservation.objects.get(pk=pk).delete()
     return redirect("reservations:my-reservations")
 
